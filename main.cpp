@@ -114,12 +114,12 @@ int select_goat(list<Goat> trip) {
 // Args:    a list of goats, an array of names, an array of colors
 // Returns: void
 void add_goat(list<Goat>& trip, string names[], string colors[]) {
-    string name = names[rand() % SZ_NAMES];     // Randomly select a name from the array
-    string color = colors[rand() % SZ_COLORS];  // Randomly select a color from the array
-    int age = rand() % (MAX_AGE + 1);           // Randomly select an age between 0 and MAX_AGE (inclusive)
+    string name = names[rand() % SZ_NAMES];     // Randomly select a name from the array.
+    string color = colors[rand() % SZ_COLORS];  // Randomly select a color from the array.
+    int age = rand() % (MAX_AGE + 1);           // Randomly select an age between 0 and MAX_AGE (inclusive).
 
-    Goat newGoat(name, age, color);             // Create a new goat using the name, age, and color
-    trip.push_back(newGoat);                    // Add the new goat to the trip using list's push_back() function
+    Goat newGoat(name, age, color);             // Create a new goat using the name, age, and color.
+    trip.push_back(newGoat);                    // Add the new goat to the trip using list's push_back() function.
     cout << "Successfully added a goat.\n";
 }
 
@@ -146,13 +146,14 @@ void delete_goat(list<Goat>& trip) {
 // Args:    a list of goats
 // Returns: void
 void display_trip(list<Goat> trip) {
+    // Return if the list is empty.
     if (trip.empty()) {
         cout << "No goats are currently in the trip.\n";
         return;
     }
     
     int index = 1;
-    // Traverse the list using a range-based for loop
+    // Traverse the list using a range-based for loop, outputting each goat's information.
     for (Goat goat : trip) {
         cout << "\t[" << index << "] " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")\n";
         ++index;
