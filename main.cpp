@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <list>
 #include "Goat.h"
+#include <iterator>
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
@@ -31,14 +32,18 @@ int main() {
 
     list<Goat> trip;
     int choice = main_menu();
-
-    add_goat(trip, names, colors);
-    add_goat(trip, names, colors);
-    add_goat(trip, names, colors);
-  
-    display_trip(trip);
-
-
+    while (choice != 4) {
+        if (choice == 1) {
+            add_goat(trip, names, colors);
+        }
+        else if (choice == 2) {
+            delete_goat(trip);
+        }
+        else if (choice == 3) {
+            display_trip(trip);
+        }
+        choice = main_menu();
+    }
 
     return 0;
 }
@@ -96,10 +101,12 @@ void add_goat(list<Goat>& trip, string names[], string colors[]) {
 }
 
 void delete_goat(list<Goat>& trip) {
-    int index = select_goat(trip);              // Ask the user what goat to delete
+    int index = select_goat(trip);  // Ask the user what goat to delete
 
-    auto it = trip.begin();
+    auto it = trip.begin();         // Create an iterator at the beginning of the list
+    advance(it, index - 1);         // Advance the iterator to the position where we want to delete (1-based index)
 
+    trip.erase(it);                 // Delete the goat using the list's erase() function and the iterator
 }
 
 void display_trip(list<Goat> trip) {
