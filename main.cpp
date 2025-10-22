@@ -29,7 +29,10 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
+    list<Goat> trip;
     int choice = main_menu();
+
+
 
 
     return 0;
@@ -55,4 +58,13 @@ int main_menu() {
 
     return choice;
 
+}
+
+void add_goat(list<Goat>& trip, string names[], string colors[]) {
+    string name = names[rand() % SZ_NAMES];     // Randomly select a name from the array
+    string color = colors[rand() % SZ_COLORS];  // Randomly select a color from the array
+    int age = rand() % (MAX_AGE + 1);           // Randomly select an age between 0 and MAX_AGE (inclusive)
+
+    Goat newGoat(name, age, color);             // Create a new goat using the name, age, and color
+    trip.push_back(newGoat);                    // Add the new goat to the trip
 }
