@@ -1,3 +1,6 @@
+// COMSC-210 | Lab 23 | Mika Aquino
+// IDE used: Visual Studio 2022
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -8,6 +11,7 @@ using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
+// Functions to manage the goats in the trip
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
@@ -30,10 +34,10 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    list<Goat> trip;            // Create an empty list of goats (called a trip)
-    int choice = main_menu();   // Output a menu of choices and ask the user for their choice
+    list<Goat> trip;            // Create an empty list of goats
+    int choice = main_menu();   // Output a menu of choices and prompt the user for a choice
 
-    // Execute the user's choice, and continue allowing the user to enter a choice until they want to quit
+    // Execute the user's choice, and continue prompting the user for a choice until they want to quit
     while (choice != 4) { // Choice 4: quit
         // Choice 1: add a goat
         if (choice == 1) {
@@ -49,16 +53,16 @@ int main() {
         }
         cout << "\n";
 
-        // Display the main menu again and continue asking the user for a choice
+        // Display the main menu again and prompt the user for a choice
         choice = main_menu();
     }
 
     return 0;
 }
 
-// Function to display the menu with a list of choices. Asks the user for their choice (an int).
+// Function to display the menu with a list of choices. It asks the user for their choice (an int).
 // Args:    none
-// Returns: user's choice
+// Returns: the user's choice
 int main_menu() {
     int choice;
     
@@ -83,7 +87,8 @@ int main_menu() {
 
 }
 
-// Function to allow the user to input an integer to select a goat. It ensures that the user entered a valid integer for an existing goat.
+// Function to allow the user to input an integer to select a goat to be deleted. It ensures that the user entered a valid integer for an existing goat.
+// Args:    a list of goats
 // Returns: the user's selection (an int)
 int select_goat(list<Goat> trip) {
     int choice;
@@ -105,6 +110,9 @@ int select_goat(list<Goat> trip) {
     return choice;
 }
 
+// Function to add a random goat to the list. It selects a random name, color, and age, and uses them to create a goat that is added to the list.
+// Args:    a list of goats, an array of names, an array of colors
+// Returns: void
 void add_goat(list<Goat>& trip, string names[], string colors[]) {
     string name = names[rand() % SZ_NAMES];     // Randomly select a name from the array
     string color = colors[rand() % SZ_COLORS];  // Randomly select a color from the array
@@ -115,21 +123,28 @@ void add_goat(list<Goat>& trip, string names[], string colors[]) {
     cout << "Successfully added a goat.\n";
 }
 
+// Function to delete a selected goat from the list.
+// Args:    a list of goats
+// Returns: void
 void delete_goat(list<Goat>& trip) {
+    // Return if the list is empty.
     if (trip.empty()) {
         cout << "No goats are currently in the trip.\n";
         cout << "No goats have been deleted.\n";
         return;
     }
 
-    int index = select_goat(trip);  // Ask the user what goat to delete
+    int index = select_goat(trip);  // Ask the user what goat to delete.
 
-    auto it = trip.begin();         // Create an iterator at the beginning of the list
-    advance(it, index - 1);         // Advance the iterator to the position where we want to delete (1-based index)
+    auto it = trip.begin();         // Create an iterator at the beginning of the list.
+    advance(it, index - 1);         // Advance the iterator to the position where we want to delete a goat (1-based index).
 
-    trip.erase(it);                 // Delete the goat using the list's erase() function and the iterator
+    trip.erase(it);                 // Delete the goat using the list's erase() function with the iterator.
 }
 
+// Function to display the list of goats.
+// Args:    a list of goats
+// Returns: void
 void display_trip(list<Goat> trip) {
     if (trip.empty()) {
         cout << "No goats are currently in the trip.\n";
