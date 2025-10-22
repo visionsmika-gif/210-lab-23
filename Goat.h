@@ -13,6 +13,9 @@ private:
 public: 
     Goat()                          { name = ""; age = 0; color = ""; }
     // write three more constructors
+    Goat(string n)                  : Goat(n, 0, "") {}             // Delegate to full parameter constructor
+    Goat(string n, int a)           : Goat(n, a, "") {}             // Delegate to full parameter constructor
+    Goat(string n, int a, string c) : name(n), age(a), color(c) {}  // Full parameter constructor
 
     // setters and getters
     void set_name(string n)         { name = n; };
