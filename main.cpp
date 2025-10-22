@@ -32,6 +32,11 @@ int main() {
     list<Goat> trip;
     int choice = main_menu();
 
+    add_goat(trip, names, colors);
+    add_goat(trip, names, colors);
+    add_goat(trip, names, colors);
+  
+    display_trip(trip);
 
 
 
@@ -60,10 +65,26 @@ int main_menu() {
 
 }
 
-/*
+// Function to allow the user to input an integer to select a goat
 int select_goat(list<Goat> trip) {
+    int choice;
 
-}*/
+    display_trip(trip);
+
+    cout << "Select a goat number\n";
+    cout << "Choice --> ";
+
+    // Validate the user's choice
+    do {
+        cin >> choice;
+        if (choice < 1 || choice > trip.size()) {
+            cout << "Invalid number. Please enter one of the numbers from the list.\n";
+            cout << "Choice --> ";
+        }
+    } while (choice < 1 || choice > trip.size());
+
+    return choice;
+}
 
 void add_goat(list<Goat>& trip, string names[], string colors[]) {
     string name = names[rand() % SZ_NAMES];     // Randomly select a name from the array
@@ -74,15 +95,17 @@ void add_goat(list<Goat>& trip, string names[], string colors[]) {
     trip.push_back(newGoat);                    // Add the new goat to the trip using list's push_back() function
 }
 
-/*
 void delete_goat(list<Goat>& trip) {
-    
-}*/
+    int index = select_goat(trip);              // Ask the user what goat to delete
+
+    auto it = trip.begin();
+
+}
 
 void display_trip(list<Goat> trip) {
     int index = 1;
     // Traverse the list using a range-based for loop
     for (Goat goat : trip) {
-        cout << "[" << index << "]" << goat.get_name() << "(" << goat.get_age() << ", " << goat.get_color() << ")\n";
+        cout << "\t[" << index << "] " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")\n";
     }
 }
