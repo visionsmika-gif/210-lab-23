@@ -30,29 +30,39 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    list<Goat> trip;            //
-    int choice = main_menu();   //
+    list<Goat> trip;            // Create an empty list of goats (called a trip)
+    int choice = main_menu();   // Output a menu of choices and ask the user for their choice
 
-    while (choice != 4) {
+    // Execute the user's choice, and continue allowing the user to enter a choice until they want to quit
+    while (choice != 4) { // Choice 4: quit
+        // Choice 1: add a goat
         if (choice == 1) {
             add_goat(trip, names, colors);
         }
+        // Choice 2: delete a goat
         else if (choice == 2) {
             delete_goat(trip);
         }
+        // Choice 3: list the goats
         else if (choice == 3) {
             display_trip(trip);
         }
         cout << "\n";
+
+        // Display the main menu again and continue asking the user for a choice
         choice = main_menu();
     }
 
     return 0;
 }
 
+// Function to display the menu with a list of choices. Asks the user for their choice (an int).
+// Args:    none
+// Returns: user's choice
 int main_menu() {
     int choice;
     
+    // Print the menu
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
@@ -60,6 +70,7 @@ int main_menu() {
     cout << "[4] Quit\n";
     cout << "Choice --> ";
     
+    // Ask the user for a choice and validate it
     do {
         cin >> choice;
         if (choice < 1 || choice > 4) {
@@ -72,7 +83,8 @@ int main_menu() {
 
 }
 
-// Function to allow the user to input an integer to select a goat
+// Function to allow the user to input an integer to select a goat. It ensures that the user entered a valid integer for an existing goat.
+// Returns: the user's selection (an int)
 int select_goat(list<Goat> trip) {
     int choice;
 
