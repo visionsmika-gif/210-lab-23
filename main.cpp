@@ -30,8 +30,9 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    list<Goat> trip;
-    int choice = main_menu();
+    list<Goat> trip;            //
+    int choice = main_menu();   //
+
     while (choice != 4) {
         if (choice == 1) {
             add_goat(trip, names, colors);
@@ -42,6 +43,7 @@ int main() {
         else if (choice == 3) {
             display_trip(trip);
         }
+        cout << "\n";
         choice = main_menu();
     }
 
@@ -76,7 +78,7 @@ int select_goat(list<Goat> trip) {
 
     display_trip(trip);
 
-    cout << "Select a goat number\n";
+    cout << "Select a goat number to delete.\n";
     cout << "Choice --> ";
 
     // Validate the user's choice
@@ -98,9 +100,16 @@ void add_goat(list<Goat>& trip, string names[], string colors[]) {
 
     Goat newGoat(name, age, color);             // Create a new goat using the name, age, and color
     trip.push_back(newGoat);                    // Add the new goat to the trip using list's push_back() function
+    cout << "Successfully added a goat.\n";
 }
 
 void delete_goat(list<Goat>& trip) {
+    if (trip.empty()) {
+        cout << "No goats are currently in the trip.\n";
+        cout << "No goats have been deleted.\n";
+        return;
+    }
+
     int index = select_goat(trip);  // Ask the user what goat to delete
 
     auto it = trip.begin();         // Create an iterator at the beginning of the list
@@ -110,9 +119,15 @@ void delete_goat(list<Goat>& trip) {
 }
 
 void display_trip(list<Goat> trip) {
+    if (trip.empty()) {
+        cout << "No goats are currently in the trip.\n";
+        return;
+    }
+    
     int index = 1;
     // Traverse the list using a range-based for loop
     for (Goat goat : trip) {
         cout << "\t[" << index << "] " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")\n";
+        ++index;
     }
 }
